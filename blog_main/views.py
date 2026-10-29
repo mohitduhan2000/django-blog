@@ -3,7 +3,7 @@ from django.http import HttpResponse
 from blogs.models import Category, Blog
 
 def home(request):
-  # categories = Category.objects.all() #Context processor
+  # categories = Category.objects.all()    # Context processor
   featured_posts = Blog.objects.filter(is_featured=True, status='Published').order_by('-updated_at')
   posts = Blog.objects.filter(is_featured=False, status='Published').order_by('-created_at')
   context = {
