@@ -1,16 +1,46 @@
-<div class="nav-scroller py-1 mb-2">
-  <nav class="nav d-flex justify-content-between">
-    <a class="p-2 text-muted" href="#">World</a>
-    <a class="p-2 text-muted" href="#">U.S.</a>
-    <a class="p-2 text-muted" href="#">Technology</a>
-    <a class="p-2 text-muted" href="#">Design</a>
-    <a class="p-2 text-muted" href="#">Culture</a>
-    <a class="p-2 text-muted" href="#">Business</a>
-    <a class="p-2 text-muted" href="#">Politics</a>
-    <a class="p-2 text-muted" href="#">Opinion</a>
-    <a class="p-2 text-muted" href="#">Science</a>
-    <a class="p-2 text-muted" href="#">Health</a>
-    <a class="p-2 text-muted" href="#">Style</a>
-    <a class="p-2 text-muted" href="#">Travel</a>
-  </nav>
-</div>
+<nav class="navbar navbar-expand-lg main-navbar navbar-dark">
+    <div class="container">
+
+        <a class="navbar-brand" href="/">MyBlog</a>
+
+        <button class="navbar-toggler"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#mainNavbar"
+                aria-controls="mainNavbar"
+                aria-expanded="false"
+                aria-label="Toggle navigation">
+
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="mainNavbar">
+
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+
+                <li class="nav-item">
+                    <a class="nav-link active" href="/">Home</a>
+                </li>
+
+                {% for cat in categories %}
+                    <li class="nav-item">
+                        <!-- Category filtering will be implemented later -->
+                        <a class="nav-link" href="#">
+                            {{ cat.category_name }}
+                        </a>
+                    </li>
+                {% empty %}
+                    <li class="nav-item">
+                        <span class="nav-link">No categories available</span>
+                    </li>
+                {% endfor %}
+
+            </ul>
+
+            <span class="navbar-text text-light small">
+                Read. Learn. Grow.
+            </span>
+
+        </div>
+    </div>
+</nav>
