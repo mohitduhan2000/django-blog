@@ -1,3 +1,20 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
+from django.http import HttpResponse
+from .models import Category, Blog
 
-# Create your views here.
+def posts_by_category(request, category_id):
+
+  categories = Category.objects.all()
+
+  category = get_object_or_404(Category, id=category_id)
+
+  posts = Blog.objects.filter(status="Published", category_id=category_id)
+
+  context = {
+    'posts' : posts,
+    'category' : category,
+    # 'categories' : categories
+  }
+  return render(request, 'blogs/post_by_category.html', context)
+
+
