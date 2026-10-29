@@ -24,3 +24,6 @@ def post_details(request, slug):
     'post' : post
   }
   return render(request, 'post_details.html', context)
+
+def about(request):
+  return render(request, 'about.html')
