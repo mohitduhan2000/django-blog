@@ -5,7 +5,7 @@
 <div class="container py-5">
 
     <h2 class="mb-4">
-        Posts in {{ category.category_name }}
+        Posts in "{{ category.category_name }}"
     </h2>
 
     <div class="row g-4">
@@ -36,7 +36,7 @@
                             {{ post.created_at|date:"M d, Y" }}
                         </small>
 
-                        <a href="#" class="btn btn-primary btn-sm">
+                        <a href="{% url 'post_details' post.slug %}" class="btn btn-primary btn-sm">
                             Read More
                         </a>
 

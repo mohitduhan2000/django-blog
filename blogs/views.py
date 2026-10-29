@@ -1,14 +1,16 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponse
 from .models import Category, Blog
 
 def posts_by_category(request, category_id):
 
-  categories = Category.objects.all()
+  # categories = Category.objects.all()   #Create Context processors for common date
 
-  category = get_object_or_404(Category, id=category_id)
-
-  posts = Blog.objects.filter(status="Published", category_id=category_id)
+  try:
+    category = get_object_or_404(Category, id=category_id)
+    posts = Blog.objects.filter(status="Published", category_id=category_id)
+  except:
+    return redirect('home')
 
   context = {
     'posts' : posts,

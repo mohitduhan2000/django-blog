@@ -49,7 +49,7 @@
                         </div>
 
                         <!-- Article detail page will be added later -->
-                        <a href="#" class="btn btn-light">
+                        <a href="{% url 'post_details' featured_post.slug %}" class="btn btn-light">
                             Read Article
                         </a>
 
@@ -90,7 +90,9 @@
                                 {{ featured_post.created_at|date:"M d, Y" }}
                             </div>
 
-                            <a href="#" class="btn btn-outline-dark btn-sm">
+                            {% comment %} <p>{{ featured_post.category}}</p> {% endcomment %}
+
+                            <a href="{% url 'post_details' featured_post.slug %}" class="btn btn-outline-dark btn-sm">
                                 Read More
                             </a>
 
@@ -161,7 +163,7 @@
                                     </p>
 
                                     <!-- Article detail page will be added later -->
-                                    <a href="#"
+                                    <a href="{% url 'post_details' post.slug %}"
                                        class="btn btn-outline-primary btn-sm">
                                         Read More
                                     </a>

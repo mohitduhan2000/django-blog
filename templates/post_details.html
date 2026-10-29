@@ -1,0 +1,97 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="container py-5">
+
+    <article class="card shadow-sm">
+        <div class="card-body p-4">
+
+            <!-- Title -->
+            <h1 class="mb-3">{{ post.title }}</h1>
+
+            <!-- Featured Image -->
+            {% if post.featured_image %}
+                <img
+                    src="{{ post.featured_image.url }}"
+                    alt="{{ post.title }}"
+                    class="img-fluid rounded mb-4"
+                    style="width: 100%; max-height: 450px; object-fit: cover;"
+                >
+            {% endif %}
+
+            <!-- Category -->
+            <p>
+                <strong>Category:</strong>
+                {% comment %} {{ post.category_id }}
+                {{ post.category }} {% endcomment %}
+                {{ post.category.category_name }}
+            </p>
+
+            <!-- Author -->
+            <p>
+                <strong>Author:</strong>
+                {% comment %} {{ post.author }} {% endcomment %}
+                {{ post.author.username }}
+            </p>
+
+            <!-- Slug -->
+            <p>
+                <strong>Slug:</strong>
+                {{ post.slug }}
+            </p>
+
+            <!-- Short Description -->
+            <h4>Short Description</h4>
+            <p>{{ post.short_description }}</p>
+
+            <hr>
+
+            <!-- Full Blog Content -->
+            <h3>Blog Content</h3>
+            <div style="white-space: pre-line;">
+                {{ post.blog_body }}
+            </div>
+
+            <hr>
+
+            <!-- Status -->
+            <p>
+                <strong>Status:</strong>
+                {{ post.status }}
+            </p>
+
+            <!-- Featured Post -->
+            <p>
+                <strong>Featured Post:</strong>
+
+                {% if post.is_featured %}
+                    Yes
+                {% else %}
+                    No
+                {% endif %}
+            </p>
+
+            <!-- Created Date -->
+            <p>
+                <strong>Created At:</strong>
+                {{ post.created_at|date:"d M Y, h:i A" }}
+            </p>
+
+            <!-- Updated Date -->
+            <p>
+                <strong>Last Updated:</strong>
+                {{ post.updated_at|date:"d M Y, h:i A" }}
+            </p>
+
+            <!-- Back Button -->
+            <a href="{% url 'home' %}" class="btn btn-primary mt-3">
+                Back to Home
+            </a>
+
+        </div>
+    </article>
+
+</div>
+
+{% endblock %}
