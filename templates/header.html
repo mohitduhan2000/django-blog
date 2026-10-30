@@ -1,40 +1,50 @@
 <header class="top-header py-4">
-    <div class="container">
-        <div class="row align-items-center gy-3">
+  <div class="container">
+    <div class="row align-items-center gy-3">
+      <div class="col-md-6 text-center text-md-start">
+        <a href="{% url 'home' %}" class="brand-title">MyBlog</a>
+        <p class="brand-subtitle mb-0">
+          Stories, ideas and inspiration for everyone.
+        </p>
+      </div>
 
-            <div class="col-md-6 text-center text-md-start">
-                <a href="{% url 'home' %}" class="brand-title">MyBlog</a>
-                <p class="brand-subtitle mb-0">
-                    Stories, ideas and inspiration for everyone.
-                </p>
-            </div>
+      <!-- Static search form: not connected to Django search yet -->
+      <div class="col-md-3">
+        <form action="{% url 'blog_search' %}" method="get" class="d-flex">
+          <input
+            type="text"
+            name="keyword"
+            value="{{ keyword }}"
+            class="form-control"
+            placeholder="Search articles..."
+            aria-label="Search articles"
+          />
+          <button class="btn btn-dark ms-2" type="submit">Search</button>
+        </form>
+      </div>
 
-            <!-- Static search form: not connected to Django search yet -->
-            <div class="col-md-3">
-                <form action="{% url 'blog_search' %}" method="get" class="d-flex">
-                    <input type="text" name="keyword" value="{{ keyword }}"
-                           class="form-control"
-                           placeholder="Search articles..."
-                           aria-label="Search articles">
-                    <button class="btn btn-dark ms-2" type="submit">
-                        Search
-                    </button>
-                </form>
-            </div>
+      <!-- Login and Signup -->
+      <div class="col-md-3 text-center text-md-end">
+        {% if not user.is_authenticated %}
 
-            <!-- Login and Signup -->
-            <div class="col-md-3 text-center text-md-end">
-                <a href="/accounts/login/"
-                   class="btn btn-outline-dark me-2">
-                    Login
-                </a>
+        <a href="{% url 'login' %}" class="btn btn-outline-dark me-2">
+          Login
+        </a>
 
-                <a href="/accounts/register/"
-                   class="btn btn-primary">
-                    Sign Up
-                </a>
-            </div>
+        <a href="{% url 'register' %}" class="btn btn-primary"> Sign Up </a>
 
-        </div>
+        {% else %}
+
+        <form action="{% url 'logout' %}" method="POST" class="d-inline">
+          {% csrf_token %}
+        <span class="me-2 fw-semibold">
+                Welcome, {{ user.username }}!
+        </span>
+          <button type="submit" class="btn btn-warning">Logout</button>
+        </form>
+
+        {% endif %}
+      </div>
     </div>
+  </div>
 </header>

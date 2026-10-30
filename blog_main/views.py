@@ -1,8 +1,11 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponse
 from blogs.models import Category, Blog
 from about.models import About
 from django.db.models import Q
+from .forms import RegistraionForm
+from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
+from django.contrib.auth import login, authenticate, logout
 
 def home(request):
   # categories = Category.objects.all()    # Context processor
@@ -39,5 +42,43 @@ def blog_search(request):
     'keyword' : keyword
   }
   return render(request, 'search.html', context)
+
+
+def register(request):
+  if request.method == "POST":
+    # form = RegistraionForm(request.POST)
+    form = UserCreationForm(request.POST)
+    if form.is_valid():
+      form.save()
+      return redirect('register')
+  else:
+    form = RegistraionForm()
+
+  context = {
+    'form' : form
+  }
+  return render(request, 'register.html', context)
+
+def login_view(request):
+  if request.method == "POST":
+    form = AuthenticationForm(request, request.POST)
+    if form.is_valid():
+      username = form.cleaned_data['username']
+      password = form.cleaned_data['password']
+      user = authenticate(request, username=username, password=password)
+      if user is not None:
+        login(request, user)
+        return redirect('home')
+  else:
+    form = AuthenticationForm()
+
+  context = {
+    'form' : form
+  }
+  return render(request, 'login.html', context)
+
+def logout_view(request):
+  logout(request)
+  return redirect('home')
 
 

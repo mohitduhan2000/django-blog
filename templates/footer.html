@@ -37,13 +37,22 @@
             <div class="col-md-4">
                 <h5 class="mb-3">Account</h5>
 
+                {% if not user.is_authenticated %}
                 <p>
-                    <a href="#">Login to your account</a>
+                    <a href="{% url 'login' %}">Login to your account</a>
                 </p>
 
                 <p>
-                    <a href="#">Create a new account</a>
+                    <a href="{% url 'register' %}">Create a new account</a>
                 </p>
+                {% else %}
+                <p>
+                    <span class="me-2 fw-semibold">
+                        Welcome, {{ user.username }}!
+                    </span>
+                    <a href="{% url 'logout' %}">Logout</a>
+                </p>
+                {% endif %}
             </div>
 
         </div>
