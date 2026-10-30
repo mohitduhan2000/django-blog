@@ -29,7 +29,8 @@ urlpatterns = [
     path('blog/search/', views.blog_search, name="blog_search"),
     path('register/', views.register, name="register"),
     path('login/', views.login_view, name="login"),
-    path('logout/', views.logout_view, name="logout")
+    path('logout/', views.logout_view, name="logout"),
+    path('dashboard/', include('dashboard.urls')),
 ]
 
 if settings.DEBUG:

@@ -35,12 +35,19 @@
 
         {% else %}
 
-        <form action="{% url 'logout' %}" method="POST" class="d-inline">
-          {% csrf_token %}
         <span class="me-2 fw-semibold">
-                Welcome, {{ user.username }}!
+        Welcome, {{ user.username }}!
         </span>
-          <button type="submit" class="btn btn-warning">Logout</button>
+
+        <a href="{% url 'dashboard' %}" class="btn btn-primary mb-2">
+            Dashboard
+        </a>
+
+        <form action="{% url 'logout' %}" method="POST" class="d-inline ">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-warning">
+                Logout
+            </button>
         </form>
 
         {% endif %}

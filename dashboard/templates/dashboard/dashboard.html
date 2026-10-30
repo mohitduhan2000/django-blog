@@ -1,0 +1,118 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="container-fluid py-4">
+    <div class="row">
+
+        <!-- Sidebar -->
+       {% include "dashboard/sidebar.html" %}
+
+        <!-- Main Dashboard -->
+        <div class="col-md-9 col-lg-10">
+
+            <!-- Welcome Section -->
+            <div class="card border-0 shadow-sm mb-4 text-white"
+                 style="background: linear-gradient(135deg, #0d6efd, #6610f2);">
+                <div class="card-body p-4">
+                    <h2>Welcome, {{ user.username }}! 👋</h2>
+                    <p class="mb-0">
+                        Welcome to your dashboard. Manage your blogs from here.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Statistics Cards -->
+            <div class="row g-3 mb-4">
+
+                <div class="col-md-4">
+                    <div class="card border-0 shadow-sm h-100">
+                        <div class="card-body">
+                            <h6 class="text-muted">Total Blogs</h6>
+                            <h2 class="text-primary">{{ blogs_count }}</h2>
+                            <p class="mb-0 small text-muted">
+                                Blogs created by you
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="card border-0 shadow-sm h-100">
+                        <div class="card-body">
+                            <h6 class="text-muted">Published Blogs</h6>
+                            <h2 class="text-success">{{ published_blogs_count }}</h2>
+                            <p class="mb-0 small text-muted">
+                                Blogs visible to readers
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="card border-0 shadow-sm h-100">
+                        <div class="card-body">
+                            <h6 class="text-muted">Draft Blogs</h6>
+                            <h2 class="text-warning">{{ draft_blogs_count }}</h2>
+                            <p class="mb-0 small text-muted">
+                                Blogs waiting to be published
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Quick Actions -->
+            <div class="card border-0 shadow-sm">
+                <div class="card-body p-4">
+                    <h4 class="mb-3">Quick Actions</h4>
+
+                    <p class="text-muted">
+                        What would you like to do today?
+                    </p>
+
+                    <a href="#" class="btn btn-primary me-2 mb-2">
+                        ➕ Create New Blog
+                    </a>
+
+                    <a href="#" class="btn btn-outline-primary me-2 mb-2">
+                        📝 View My Blogs
+                    </a>
+
+                    <a href="{% url 'home' %}" class="btn btn-outline-secondary mb-2">
+                        🌐 Visit Website
+                    </a>
+                </div>
+            </div>
+
+            <!-- Account Information -->
+            <div class="card border-0 shadow-sm mt-4">
+                <div class="card-body p-4">
+                    <h4 class="mb-3">Account Information</h4>
+
+                    <p>
+                        <strong>Username:</strong> {{ user.username }}
+                    </p>
+
+                    <p>
+                        <strong>Email:</strong>
+                        {{ user.email|default:"Not provided" }}
+                    </p>
+
+                    <p class="mb-0">
+                        <strong>Account Status:</strong>
+                        {% if user.is_active %}
+                            <span class="badge bg-success">Active</span>
+                        {% else %}
+                            <span class="badge bg-danger">Inactive</span>
+                        {% endif %}
+                    </p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+{% endblock %}

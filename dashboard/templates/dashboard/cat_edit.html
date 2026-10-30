@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+<div class="container-fluid py-4">
+    <div class="row">
+
+        <!-- Sidebar -->
+        {% include "dashboard/sidebar.html" %}
+
+        <!-- Main Content -->
+        <div class="col-md-9 col-lg-10">
+
+            <h2>Edit Category</h2>
+
+            <form method="POST" action="{% url "cat_edit" category.id %}">
+                {% csrf_token %}
+
+                {{ form|crispy }}
+
+                <button type="submit" class="btn btn-primary mt-2">
+                    Update Category
+                </button>
+
+                <a href="{% url 'category' %}" class="btn btn-secondary mt-2">
+                    Cancel
+                </a>
+            </form>
+
+        </div>
+    </div>
+</div>
+
+{% endblock %}
