@@ -11,12 +11,12 @@
 
             <!-- Static search form: not connected to Django search yet -->
             <div class="col-md-3">
-                <form action="#" method="get" class="d-flex">
-                    <input type="search"
+                <form action="{% url 'blog_search' %}" method="get" class="d-flex">
+                    <input type="text" name="keyword" value="{{ keyword }}"
                            class="form-control"
                            placeholder="Search articles..."
                            aria-label="Search articles">
-                    <button class="btn btn-dark ms-2" type="button">
+                    <button class="btn btn-dark ms-2" type="submit">
                         Search
                     </button>
                 </form>
